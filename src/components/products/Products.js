@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { CiHeart, CiShoppingCart } from "react-icons/ci";
+import { CiShoppingCart } from "react-icons/ci";
+import { FaRegHeart, FaHeart } from "react-icons/fa";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { toggleToWishes } from "../../context/heartSlice";
+
 let API = "https://dummyjson.com/products";
 const Products = () => {
+  const dispatch = useDispatch();
+  let wishes = useSelector((state) => state.wishlist.value);
   const [data, setData] = useState([]);
   useEffect(() => {
     axios
@@ -21,8 +28,8 @@ const Products = () => {
         ${el.price} <span>50$</span>
       </h3>
       <div className="buttons">
-        <button>
-          <CiHeart />
+        <button onClick={() => dispatch(toggleToWishes(el))}>
+          {wishes.some((w) => w.id == el.id) ? <FaHeart /> : <FaRegHeart />}
         </button>
         <button>
           <CiShoppingCart />

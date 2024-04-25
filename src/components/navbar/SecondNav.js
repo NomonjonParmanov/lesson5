@@ -1,10 +1,12 @@
 import React from "react";
 import { CiSearch, CiHeart, CiShoppingCart } from "react-icons/ci";
-
+import { Link } from "react-router-dom";
 function SecondNav() {
   return (
     <div className="container second">
-      <h1>Exclusive</h1>
+      <Link to={"/"}>
+        <h2>Exclusive</h2>
+      </Link>
       <ul>
         <li>Home</li>
         <li>Contact</li>
@@ -19,7 +21,9 @@ function SecondNav() {
           <CiSearch />
         </li>
         <li>
-          <CiHeart />
+          <Link to={"/like"}>
+            <CiHeart />
+          </Link>
         </li>
         <li>
           <CiShoppingCart />
